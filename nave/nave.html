@@ -12,12 +12,8 @@
         --up:   rotate(-20deg);
         --down: rotate(90deg);
     }
-    body{
-        background-image: var(--fundo);
-    }
-
-   #nave{
-    
+    body { background-image: var(--fundo); }
+   #nave{    
         position:absolute;
         width:200px;
         height:100px; 
@@ -39,9 +35,9 @@
 </head>
 
 <body>  
-    <div id="nave"></div> 
-       
+    <div id="nave"></div>        
 </body>
+    
 <script>
     const personagem = document.querySelector("#nave"); 
     const posicao = { top:0, left:0 }
@@ -63,8 +59,7 @@
             ArrowDown: down,
             ArrowRight: right , 
             ArrowLeft: left,
-    }
-    
+    }    
     const moverPersonagem = (eventName) => {
         personagem.classList.remove(...Object.keys(teclas));
         personagem.classList.add(eventName);  
@@ -72,16 +67,12 @@
         personagem.style.left = `${posicao.left}px`;         
     }
 
-    document.addEventListener("keydown", event => {
-      
+    document.addEventListener("keydown", event => {      
         const keyboard = teclas[event.key]
         keyboard ? (
             keyboard(),
             moverPersonagem(event.key)
-        ) : ''
-        
+        ) : ''        
     })
-
-
 </script>
 </html>
