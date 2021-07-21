@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nave - Strategy</title>
+<style>
+    :root{
+        --fundo: url(espaco.jpg);
+        --nave: url(nave.gif);
+        --up:   rotate(-20deg);
+        --down: rotate(90deg);
+    }
+    body{
+        background-image: var(--fundo);
+    }
+
+   #nave{
+    
+        position:absolute;
+        width:200px;
+        height:100px; 
+        background-image: var(--nave);  
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    .ArrowDown{ 
+        transform: var(--down); 
+    }
+    .ArrowUp{        
+        transform: var(--up);       
+    }
+    .ArrowLeft {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+    }
+</style>
+</head>
+
+<body>  
+    <div id="nave"></div> 
+       
+</body>
+<script>
+    const personagem = document.querySelector("#nave"); 
+    const posicao = { top:0, left:0 }
+     
+    const left = () => {
+        posicao.left = posicao.left - 10        
+    }
+    const right = () => {
+        posicao.left = posicao.left + 10
+    }
+    const up = () => {
+        posicao.top = posicao.top - 10
+    }
+    const down = () => {
+        posicao.top = posicao.top + 10
+    }
+    const teclas = {
+            ArrowUp: up,
+            ArrowDown: down,
+            ArrowRight: right , 
+            ArrowLeft: left,
+    }
+    
+    const moverPersonagem = (eventName) => {
+        personagem.classList.remove(...Object.keys(teclas));
+        personagem.classList.add(eventName);  
+        personagem.style.top = `${posicao.top}px`;
+        personagem.style.left = `${posicao.left}px`;         
+    }
+
+    document.addEventListener("keydown", event => {
+      
+        const keyboard = teclas[event.key]
+        keyboard ? (
+            keyboard(),
+            moverPersonagem(event.key)
+        ) : ''
+        
+    })
+
+
+</script>
+</html>
